@@ -1,32 +1,24 @@
 # TimeTrackerBash
 a simple time tracker for the commandline
 
+1. **Installation og forberedelse:**
+   - Sørg for, at du har Bash installeret på din computer eller server.
+   - Kopier scriptet til en tekstfil og gem det med et passende navn, f.eks. `smart_tracker.sh`.
+   - Åbn en terminal og naviger til mappen, hvor scriptet er gemt.
 
-#!/bin/bash
+2. **Kør scriptet:**
+   - For at bruge scriptet skal du angive tre argumenter: starttidspunkt, sluttidspunkt og projektnavn. Eksempelvis:
+     ```bash
+     ./smart_tracker.sh "09:38" "09:59" "Projekt XYZ"
+     ```
+   - Scriptet beregner tidsforskellen mellem start- og sluttidspunktet og logger disse oplysninger i filen "dagen.log". Du vil også se resultatet i terminalen.
 
-# Kontroller, om der er tre argumenter
-if [ "$#" -ne 3 ]; then
-  echo "Brug: $0 <start_tid> <slut_tid> <projektnavn>"
-  exit 1
-fi
+3. **Se loggen:**
+   - Efter at have kørt scriptet kan du se resultaterne ved at åbne logfilen "dagen.log" i samme mappe som scriptet.
+   - Logfilen indeholder oplysninger om starttid, sluttid, projektnavn og tidsforskellen i minutter for hver kørte session.
 
-# Gem argumenterne i variabler
-start_tid="$1"
-slut_tid="$2"
-projektnavn="$3"
+4. **Brug i projektstyring:**
+   - Du kan bruge denne smarte tracker til at holde styr på tid brugt på forskellige opgaver eller projekter.
+   - Hvis du har flere sessioner, kan du blot køre scriptet igen med de relevante argumenter for hver session.
 
-# Konverter starttidspunktet og sluttidspunktet til sekunder siden midnat
-start_sekunder=$(date -d "$start_tid" +%s)
-slut_sekunder=$(date -d "$slut_tid" +%s)
-
-# Beregn tidsforskellen i sekunder
-forskel_sekunder=$((slut_sekunder - start_sekunder))
-
-# Konverter tidsforskellen til minutter
-forskel_minutter=$((forskel_sekunder / 60))
-
-# Skriv tidsforskellen og tidspunkterne til en logfil
-echo "Starttid: $start_tid - Sluttid: $slut_tid - Projekt: $projektnavn - Tidsforskel: $forskel_minutter minutter" >> dagen.log
-
-# Vis tidsforskellen
-echo "Tidsforskel mellem $start_tid og $slut_tid er $forskel_minutter minutter."
+Husk at tilpasse start- og sluttidspunkter samt projektnavne efter behov. Scriptet vil løbende opdatere logfilen med nye sessioner, så du kan bruge det til at overvåge tidsforbrug på forskellige projekter eller opgaver.
